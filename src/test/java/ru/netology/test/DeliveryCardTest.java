@@ -2,6 +2,10 @@ package ru.netology.test;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import ru.netology.data.DataGenerator;
@@ -14,6 +18,15 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class DeliveryCardTest {
+
+   @BeforeAll
+   static void setUpAll() {
+       SelenideLogger.addListener("allure", new AllureSelenide());
+   }
+   @AfterAll
+   static void tearDownAll() {
+       SelenideLogger.removeListener("allure");
+   }
 
     @Test
     void shouldRegisterTheCard() {
